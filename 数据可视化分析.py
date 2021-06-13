@@ -17,7 +17,7 @@ def get_max_page(productId):
     return dic_date['maxPage']
 
 def get_info(productId):
-    max_page=3
+    max_page=4
     list=[]
     for page in range(1,max_page+1):
         comments=get_comments(productId,page)
@@ -36,7 +36,7 @@ def save(list):
 
     for item in list:
         sheet.append(item)
-    wk.save('数据.xlsx')
+    wk.save('数据1.xlsx')
 
 
 
