@@ -1,11 +1,8 @@
 import requests
 import  re
-
 url = 'https://www.qiushibaike.com/video/page/3/'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'}
 resp = requests.get(url, headers=headers)
-
-
 vi = re.findall('<source src="(.*)" type=\'video/mp4\' />',resp.text)
 list = []
 for item in vi:

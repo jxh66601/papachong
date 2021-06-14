@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import  BeautifulSoup
 from urllib.parse import quote
 
 def get_html(url):
@@ -31,3 +31,4 @@ if __name__ == '__main__':
         url = "https://fabiaoqing.com/search/bqb/keyword/{0}/type/bq/page/{1}.html".format(quote(key_word),i+1)
         html = get_html(url)
         parse_html(html)
+        print("ok")
