@@ -5,9 +5,9 @@ import openpyxl
 def send_request():
     url='https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=2021-06-25&leftTicketDTO.from_station=BJP&leftTicketDTO.to_station=SHH&purpose_codes=ADULT'
     headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-             'Cookie':'_uab_collina=162564845810447941042307; JSESSIONID=0407BBBF957EF2609C09AD2D4C063409; route=495c805987d0f5c8c84b14f60212447d; BIGipServerotn=4023845130.64545.0000; RAIL_EXPIRATION=1625970490130; RAIL_DEVICEID=IZYi9rdmz6I9ue42W0_hDXq38stq68_Y8373FejjvFpugNKGwmJWRgKiVBSBthShjBThztIiTqc-IaE0r4OgZZCoTNuj4EXZnZTAEU_F4Fkp1ejoRHuTsPSR0sqFyp_g5kJrmKSvph3x2cjH4y9Ix9bgMBRbvWUV; BIGipServerpassport=854065418.50215.0000; _jc_save_fromStation=%u5317%u4EAC%2CBJP; _jc_save_fromDate=2021-07-07; _jc_save_toDate=2021-07-07; _jc_save_wfdc_flag=dc; _jc_save_toStation=%u4E0A%u6D77%2CSHH'}
+             'Cookie': '_uab_collina=162365880952000731295007; JSESSIONID=548301EC12F1D31FDAD98EF36FFE32F0; BIGipServerotn=4007067914.50210.0000; RAIL_EXPIRATION=1623992874990; RAIL_DEVICEID=TAvcVl4TUC6WmZ-WlIktH4DHc4AL8OrOSkbec5827ugo4Spx8_NsZNJtuUdC24sDS5hLhHZ4ZVSWNy4Ykd-ngHNIGyWCgwasK1791T6BU9g4fMAFsyMJXB1btvwkncFCumtzf3zGKJc_c4K_jhIBWX8pJjosr97k; BIGipServerpassport=904397066.50215.0000; route=495c805987d0f5c8c84b14f60212447d; _jc_save_toDate=2021-06-14; _jc_save_wfdc_flag=dc; _jc_save_fromDate=2021-06-25; _jc_save_fromStation=%u5317%u4EAC%2CBJP; _jc_save_toStation=%u4E0A%u6D77%2CSHH; BIGipServerportal=3134456074.17695.0000'}
     resp=requests.get(url,headers=headers)
-    resp.encoding = 'utf-8-sig'
+    resp.encoding = 'utf-8'
     #print(resp.text)
     return resp
 
@@ -21,7 +21,6 @@ def parse_json(resp,city):
     return list
 #3 车次
 #6 出发地
-
 #7 目的地
 #30 二等座
 #31 一等座
@@ -39,13 +38,13 @@ def save(list):
 
 def start():
     lst=parse_json(send_request(),get_city())
-    save(list)
+    save(lst)
 
 def get_city():
     url='https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9192'
     headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'}
     resp=requests.get(url,headers=headers)
-    resp.encoding = 'utf-8-sig'
+    resp.encoding = 'utf-8'
     #print(resp.text)
     stations=re.findall('([\u4e00-\u9fa5]+)\|([A-Z]+)',resp.text)
     stations_data=dict(stations)
